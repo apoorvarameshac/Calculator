@@ -11,7 +11,7 @@ pipeline {
         stage('Clone') {
             steps {
                 echo 'Cloning the repository'
-                git branch: 'main', url: 'https://github.com/apoorvarameshac/Calculator.git'
+                git branch: 'feature', url: 'https://github.com/apoorvarameshac/Calculator.git'
             }
         }
         stage('Builing') {
@@ -23,7 +23,7 @@ pipeline {
         stage('creating container') {
             steps {
                 echo 'creating container'
-                sh 'docker run -d -p 5001:5000 ${FULL_IMAGE}'
+                sh 'docker run -d -p 5002:5000 ${FULL_IMAGE}'
             }
         }
     }
