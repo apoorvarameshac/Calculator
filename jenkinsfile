@@ -17,7 +17,7 @@ pipeline {
         stage('Builing') {
             steps {
                 echo 'Builing docker image'
-                sh 'docker build -t ${FULL_IMAGE}'
+                sh 'docker build -t ${FULL_IMAGE} .'
             }
         }
         stage('creating container') {
