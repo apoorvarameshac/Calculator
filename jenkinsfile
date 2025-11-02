@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    
+    environment {
+        IMG_NAME = 'apoorvar12/python-app'
+        TAG_NAME = "v1.0.${BUILD_NUMBER}"
+        FULL_IMAGE = "${IMG_NAME}:${TAG_NAME}" 
+    }
+
+    stages {
+        stage('Clone') {
+            steps {
+                echo 'Cloning the repository'
+                git branch: 'main', url: 'https://github.com/apoorvarameshac/Calculator.git'
+            }
+        }
+        stage('Builing') {
+            steps {
+                echo 'Builing docker image'
+                sh 'docker build -t ${FULL_IMAGE}'
+            }
+        }
+        stage('creating container') {
+            steps {
+                echo 'creating container'
+                sh 'docker run -d -p 5001:5000 ${FULL_IMAGE}'
+            }
+        }
+    }
+}
